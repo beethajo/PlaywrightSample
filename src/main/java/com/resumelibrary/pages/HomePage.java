@@ -135,4 +135,14 @@ public class HomePage {
         page.locator("#pass").fill("rltest01");
         page.locator("#signin-as-jobseeker").click();
     }
+
+    public String verifyTextMessagePTags(String ptagText) {
+
+        String[] locator = {"xpath", "//p[contains(text(),\"" + ptagText + "\")]"};
+        String xpath = "//p[contains(text(),\"" + ptagText + "\")]";
+        String result = page.locator(xpath).textContent();
+        System.out.println("ptag text " + result);
+        return result;
+
+    }
 }

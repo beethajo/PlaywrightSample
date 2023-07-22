@@ -92,7 +92,8 @@ Feature: Candidate Home Home
     And   I should see text H one tag "Search Companies"
     Then  I move backward one page
     And   I should see text "America's Fastest-Growing Job Board"
-    And   I should see text "Upload your resume and use our advanced searching tool to browse jobs, from over 50 different industries. Our Career Advice, written by industry experts, will support you from job search, to interview, and beyond."
+    And   I should see text "Resume-Library is one of the leading U.S. job boards, ready to assist with every aspect of your job hunt."
+    And   I should see text p tag "Upload your resume and use our " and verify message "Upload your resume and use our advanced searching tool to browse jobs, from over 50 different industries. Our Career Advice, written by industry experts, will support you from job search, to interview, and beyond."
     And   I click on "advanced searching tool"
     Then  I should be on page "Search Jobs"
     And   I should see text H one tag "Advanced Job Search"
@@ -118,12 +119,12 @@ Feature: Candidate Home Home
   Scenario: Validate other links and buttons on home page part3
     And   I should see text H two tag "Register your Resume"
     And   I should see text H two tag "Job Alerts"
-    And   I should see text "Upload your resume in minutes and let the jobs find you. With companies headhunting talent across 50 different industries, get noticed and get hired, fast!"
+    And   I should see text p tag "in minutes and let the jobs find you. With companies headhunting talent across 50 different industries, get noticed and get hired, fast!" and verify message "Upload your resume in minutes and let the jobs find you. With companies headhunting talent across 50 different industries, get noticed and get hired, fast!"
     And   I click on "Register Now"
     Then  I should be on page "Candidate Registration"
     And   I should see text H one tag "Upload Resume & Register Today"
     Then  I move backward one page
-    And   I should see text "Receive the latest jobs straight to your inbox with Job Alerts. They take seconds to set up and you can apply instantly to the best job matches!"
+    And   I should see text p tag "Receive the latest" and verify message "Receive the latest jobs straight to your inbox with Job Alerts. They take seconds to set up and you can apply instantly to the best job matches!"
     And   I click on "Get Job Alerts"
     Then  I should be on page "Job Alerts"
     And   I should see text "Create a Job Alert"
@@ -139,13 +140,12 @@ Feature: Candidate Home Home
     And   I click on "Career Advice"
     Then  I should be able to see in browser URL "Career Advice"
     And   I should see text H one tag "Career Advice"
-
     Then  I move backward one page
     And   I should see text "Download the Resume-Library app and search jobs on the go. Available on Apple App Store and Google Play."
     And   I click on "Job Search App"
     Then  I should be on page "Search Jobs On The Go"
     And   I should see text H one tag "Search and Apply to Jobs On-the-Go!"
-    And   I should see text "Stay on top of the freshest job opportunities in your industry with Resume-Library's Job Search App - available free on mobile and tablet devices."
+    And   I should see text p tag "Stay on top of the freshest job opportunities in your industry with " and verify message "Stay on top of the freshest job opportunities in your industry with Resume-Library's Job Search App - available free on mobile and tablet devices."
 
   @homePageResumeLibraryLogo @homePage @CandidateE2E
   Scenario: Validate resume library logo on home page
@@ -188,3 +188,4 @@ Feature: Candidate Home Home
     And   I should see text H one tag "My Email Preferences"
     When  I click on "Logout" Header Link
     Then  I should be on page "Logout"
+    And   I should see text p tag " Thanks for using Resume-Library!" and verify message "You have been logged out successfully. Thanks for using Resume-Library!"

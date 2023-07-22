@@ -249,4 +249,9 @@ public class HomePageStep extends Utility {
                 break;
         }
     }
+
+    @And("I should see text p tag {string} and verify message {string}")
+    public void iShouldSeeTextPTagAndVerifyMessage(String ptagText, String textTobeVerified) {
+        Assert.assertEquals(home.verifyTextMessagePTags(ptagText), textTobeVerified);
+    }
 }
