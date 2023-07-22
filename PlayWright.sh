@@ -1,0 +1,1 @@
+CUCUMBER_FILTER_TAGS="@$1" mvn test
