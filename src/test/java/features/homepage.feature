@@ -110,11 +110,6 @@ Feature: Candidate Home Home
     Then  I should be on page "Career Advice"
     And   I should see text H one tag "Career Advice"
 
-  @google
-  Scenario: Search for a job and verify clear recent searches
-    When  I am on home Page
-    And   I should see text "Google"
-
   @homePageOtherLinksPart3
   Scenario: Validate other links and buttons on home page part3
     And   I should see text H two tag "Register your Resume"
@@ -122,7 +117,7 @@ Feature: Candidate Home Home
     And   I should see text p tag "in minutes and let the jobs find you. With companies headhunting talent across 50 different industries, get noticed and get hired, fast!" and verify message "Upload your resume in minutes and let the jobs find you. With companies headhunting talent across 50 different industries, get noticed and get hired, fast!"
     And   I click on "Register Now"
     Then  I should be on page "Candidate Registration"
-    And   I should see text H one tag "Upload Resume & Register Today"
+    And   I should see text h one tags "Upload Resume & " and verify message "Upload Resume & Register Today"
     Then  I move backward one page
     And   I should see text p tag "Receive the latest" and verify message "Receive the latest jobs straight to your inbox with Job Alerts. They take seconds to set up and you can apply instantly to the best job matches!"
     And   I click on "Get Job Alerts"
