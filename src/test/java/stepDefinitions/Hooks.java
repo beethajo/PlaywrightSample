@@ -22,7 +22,10 @@ public class Hooks extends Utility {
         if (browserType == "localChrome") {
             playwright = Playwright.create();
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
-            context = browser.newContext();
+            //context = browser.newContext();
+            context = browser.newContext(new Browser.NewContextOptions()
+                    .setRecordVideoDir(Paths.get("test-reports/Videos/")) // Set the video recording directory
+                    .setRecordVideoSize(1280, 720));
             page = context.newPage();
 
         } else if (browserType == "LambdaChrome") {
@@ -58,14 +61,16 @@ public class Hooks extends Utility {
             scenario.log("[--->CURRENT TAG IS : " + scenario.getSourceTagNames() + "<---]");
             scenario.log("[--->--------------------------------------------" + "<---]");
             getScreenshot(scenario);
+            context.close();
             browser.close();
+            playwright.close();
         }
 
     }
 
     public void getScreenshot(Scenario scenario) {
         try {
-            scenario.attach(page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("src/test/reports/screenshot.png"))), "image/jpg", scenario.getName());
+           scenario.attach(page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("src/test/reports/screenshot.png"))), "image/jpg", scenario.getName());
         } catch (Exception e) {
 
         }
