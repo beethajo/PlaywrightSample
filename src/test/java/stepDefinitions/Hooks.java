@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 
 public class Hooks extends Utility {
     private static final Logger logger = LogManager.getLogger(Hooks.class);
-    static String browserType = "localChrome";
+    static String browserType = "LambdaChrome";
 
     @Before(order = 1)
     public static void initiateBrowser() {
@@ -21,7 +21,7 @@ public class Hooks extends Utility {
 
         if (browserType == "localChrome") {
             playwright = Playwright.create();
-            browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+            browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
             //context = browser.newContext();
             context = browser.newContext(new Browser.NewContextOptions()
                     .setRecordVideoDir(Paths.get("test-reports/Videos/")) // Set the video recording directory
@@ -41,12 +41,14 @@ public class Hooks extends Utility {
             ltOptions.addProperty("accessKey", accessKey);
             ltOptions.addProperty("network", true);
             ltOptions.addProperty("console", true);
-            ltOptions.addProperty("tunnel", false);
+            ltOptions.addProperty("tunnel", true);
             capabilities.add("LT:Options", ltOptions);
             BrowserType chromium = playwright.chromium();
             String cdpUrl = "wss://cdp.lambdatest.com/playwright?capabilities=" + capabilities;
             browser = chromium.connect(cdpUrl);
+            context = browser.newContext();
             page = browser.newPage();
+
         }
     }
 
@@ -61,10 +63,11 @@ public class Hooks extends Utility {
             scenario.log("[--->CURRENT TAG IS : " + scenario.getSourceTagNames() + "<---]");
             scenario.log("[--->--------------------------------------------" + "<---]");
             getScreenshot(scenario);
-            context.close();
-            browser.close();
-            playwright.close();
+
         }
+        context.close();
+        browser.close();
+        playwright.close();
 
     }
 
@@ -76,5 +79,9 @@ public class Hooks extends Utility {
         }
     }
 
+    public static void setTestStatus(String status, String remark, Page page) {
+        Object result;
+        result = page.evaluate("_ => {}", "lambdatest_action: { \"action\": \"setTestStatus\", \"arguments\": { \"status\": \"" + status + "\", \"remark\": \"" + remark + "\"}}");
+    }
 }
 
