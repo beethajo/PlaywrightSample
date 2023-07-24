@@ -63,7 +63,10 @@ public class Hooks extends Utility {
             scenario.log("[--->CURRENT TAG IS : " + scenario.getSourceTagNames() + "<---]");
             scenario.log("[--->--------------------------------------------" + "<---]");
             getScreenshot(scenario);
-
+            setTestStatus("FAILED", "TEST FAILED", page);
+        }
+         else {
+            setTestStatus("PASSED", "TEST PASSED", page);
         }
         context.close();
         browser.close();
